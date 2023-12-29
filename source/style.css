@@ -4,7 +4,12 @@
     --main-color: rgb(247, 241, 215);
     --notepad-color: rgb(252, 252, 252);
     --interactive-color:#1C274C;
+    --interactive-color-hover:hsl(226, 41%, 47%);
+    --interactive-color-active:#001d7e;
     --shadow-color:#1c274c7c;
+    --shadow-color-active:#1c33817c;
+
+    --popupShadow-color:rgba(0, 0, 0, 0.452);
 
 
     /* font-size */
@@ -20,11 +25,31 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+    font-family: var(--main-font-family);
 }
 
 body{
     background-color: var(--main-color);
 }
+
+
+.icon{
+    padding: 2px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-color: var(--interactive-color);
+    transition: all 0.15s ease-in;
+    border-radius: 8px;
+}
+
+.icon:hover{
+    background-color: var(--interactive-color-hover);
+}
+.icon:active{
+    background-color: var(--interactive-color-active);
+}
+
 
 header{
     display: block;
@@ -46,7 +71,6 @@ header{
 
 .logo{
     color:var(--interactive-color);
-    font-family: var(--main-font-family);
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -60,41 +84,313 @@ header{
     gap: 8px;
 }
 
-.iconBlock__icon{
-    padding: 2px;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background-color: var(--interactive-color);
-    border-radius: 8px;
-}
+
 
 .content{
     display: block;
     min-height: 100%;
 }
 
+
+
+
+
 .sidebar{
     position: absolute;
-    display: block;
-    height: 100px;
-    background-color: red;
+    display: none;
+    min-height: 10px;
+    width: 40px;
+    left: 8px;
+    background-color: green;
 }
 
+
+
+
+
+
 .notepad{
-    display: block;
-    min-height: 1600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 75vh;
     width: 1200px;
     background-color: var(--notepad-color);
     margin: 64px auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px 1px var(--shadow-color);
+    padding: 24px;
+}
+
+.notepad__title{
+    position: relative;
+    font-size: 32px;
+    text-align: center;
+    font-weight: 600;
+    color:var(--interactive-color);
+}
+
+.notepad__textarea{
+    resize: none;
+    width: 100%;
+    flex-grow: 1;
+    padding:12px 24px;
+    border: none;
+    border-radius: 8px;
+    color:var(--interactive-color);
+    font-size: 18px;
+}
+
+.notepad__textarea:focus{
+    outline: none;
+}
+
+.notepad__burgerMenu{
+    display: none;
+    position: absolute;
+    top:50%;
+    transform: translate(0,-50%);
+    padding: 4px;
 }
 
 
+
+.blockNotes{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    width: 200px;
+    left: -208px;
+    top:0;
+    min-height: 75vh;
+    max-height: 75vh;
+    background-color: var(--notepad-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 1px var(--shadow-color);
+    padding:12px;
+}
+
+.blockNotes__titles{
+    display: flex;
+    justify-content: space-between;    
+}
+.blockNotes__titles button{
+    background-color: var(--interactive-color);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer; 
+}
+
+.blockNotes__titles button:hover{
+    background-color: var(--interactive-color-hover);
+}
+
+.blockNotes__titles button:active{
+    background-color: var(--interactive-color-active);
+}
+
+
+.blockNotes__search{
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.blockNotes__container{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 8px;
+    padding: 4px 8px;
+    border: 1px solid var(--shadow-color);
+    border-radius: 8px;
+    
+}
+
+.blockNotes__note{
+    cursor: pointer;
+    user-select:none;
+    padding: 4px 8px;
+    transition: all 0.15s ease-in;
+}
+.blockNotes__note:hover{
+    background-color: var(--shadow-color);
+}
+.blockNotes__note:active{
+    background-color: var(--shadow-color-active);
+}
+
+
+
+
+
 footer{
+    position: absolute;
+    display: block;
+    bottom:8px;
+    right:0;
+    left:0;
     text-align: center;
     text-transform: uppercase;
-    font-family: var(--main-font-family);
-    margin-bottom: 32px;
+}
+
+
+.popup{
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--popupShadow-color);
+}
+.popupContainer{
+    position: relative;
+    display: block;
+    min-width: 600px;
+    min-height: 600px;
+    background-color: var(--notepad-color);
+    border: 2px solid var(--shadow-color);
+    border-radius: 8px;
+}
+
+.closePopup{
+    position: absolute;
+    text-transform: uppercase;
+    color: white;
+    font-size: 18px;
+    right: -16px;
+    top:-16px;
+}
+
+
+
+@media (max-width:1700px) { 
+    .header__container{
+        width: 1000px;
+    }
+    .notepad{
+        width: 1000px;
+        margin: 40px auto;
+    }
+}
+@media (max-width:1500px) { 
+    .header__container{
+        width: 800px;
+    } 
+    .notepad{
+        width: 800px;
+    }
+}
+@media (max-width:1300px) { 
+    .header__container{
+        width: 600px;
+    }
+    .notepad{
+        width: 600px;
+        margin: 24px auto;
+    }
+}
+
+
+
+@media (max-width:1100px) {
+    .content{
+        padding:0 40px;
+    }
+
+    .header__container{
+        width: 100%;
+        height: 100%;
+        padding:0 40px;
+    }
+    
+    .iconBlock{
+        right: 40px;
+    }
+
+    .notepad{
+        width: 100%;
+        padding:12px;
+        gap: 12px;
+    }
+    .blockNotes{
+        display: none;
+    }
+    .notepad__burgerMenu{
+        display: block;
+    }
+}
+
+
+@media (max-width:768px) {
+    .content{
+        padding:0 20px;
+    }
+
+    .header__container{
+        padding:0 20px;
+    }
+    
+    .iconBlock{
+        right: 20px;
+    }
+
+    .notepad__title{
+        font-size: 24px;
+    }
+    .notepad__textarea{
+        font-size: 16px;
+        padding:4px 8px;
+    }
+
+    .popup{
+        padding:40px;
+    }
+    .popupContainer{
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        min-width: 0;
+    }
+}
+
+
+
+@media (max-width:420px) {
+    .content{
+        padding:0 8px;
+    }
+
+    .header__container{
+        padding:0 8px;
+    }
+
+    .logo{
+        width: 100px;
+        line-height: 24px;
+    }
+    
+    .iconBlock{
+        right: 8px;
+    }
+    
+    .notepad{
+        margin: 12px auto;
+    }
+    .notepad__title{
+        font-size: 18px;
+        text-align: right;
+    }
+
+    .popup{
+        padding:24px;
+    }
 }
