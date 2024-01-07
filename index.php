@@ -1,8 +1,3 @@
-<?php
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +22,8 @@
 
     </header>
     <div class="content">
-        <div class="sidebar">
-            s
+        <div class="sidebar__container">
+            <div class="sidebar">s</div>
         </div>
         <div class="notepad">
             <div class="blockNotes">
@@ -64,7 +59,7 @@
                 <img src="./source/img/burger-menu.png" alt="burger-menu" class="icon notepad__burgerMenu">
                 29 декабря 2023г.
             </div>
-            <textarea class="notepad__textarea">asdalskjdlkasjdlkas</textarea>
+            <textarea class="notepad__textarea">...</textarea>
         </div>
     </div>
 
@@ -72,13 +67,13 @@
         <p class="copyright">*getYear*©</p>
     </footer>
 
-    <div class="popupInfo popup">
-        <div class="popupContainer">
+    <div class="popupContainerInfo popupContainer">
+        <div class="popupInfo popup">
             <button class="closePopup icon">x</button>
         </div>
     </div>
-    <div class="popupSettings popup">
-        <div class="popupContainer">
+    <div class="popupContainerSettings popupContainer">
+        <div class="popupSettings popup">
             <button class="closePopup icon">x</button>
         </div>
     </div>
