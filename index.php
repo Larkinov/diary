@@ -15,7 +15,10 @@
                 Simple Dialy
             </h2>
             <div class="iconBlock">
+                <a href="authorization/index.php"><img src="./source/img/log_in.png" alt="info" class="icon btnLogin"></a>
+
                 <img src="./source/img/info.png" alt="info" class="icon btnInfo">
+
                 <img src="./source/img/settings.png" alt="settings" class="icon btnSettings">
             </div>
         </div>
@@ -153,6 +156,15 @@
             </div>
         </div>
     </div>
+    <!-- <div class="popupContainerLogin popupContainer">
+        <div class="popupLogin popup">
+            <a href=- class="closePopup icon">x</a>
+            <div class="popupContent">
+                <h2>Вход</h2>
+                <p>Это простой дневник для написания записей в браузере. Все записи сохранятся на вашем компьютере.</p>
+            </div>
+        </div>
+    </div> -->
 </body>
 
 <script src="source/js/uiScript.js"></script>
