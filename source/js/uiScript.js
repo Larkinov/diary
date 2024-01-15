@@ -11,6 +11,8 @@ let popupSettings = document.querySelector(".popupSettings");
 let popupContainerSettings = document.querySelector(".popupContainerSettings");
 
 
+
+
 let closePopup = document.querySelectorAll(".closePopup");
 let popups = document.querySelectorAll(".popup");
 

@@ -1,4 +1,4 @@
-let delaySaveText = 3000;
+let delaySaveText = 1500;
 let textarea = document.querySelector(".notepad__textarea");
 
 const KEY_TEXT = getDateNow(true);
