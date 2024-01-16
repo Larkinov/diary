@@ -20,6 +20,8 @@ let sidebarContainer = document.querySelector(".sidebar__container");
 let sidebar = document.querySelector(".sidebar");
 let btnSidebar = document.querySelector(".notepad__burgerMenu");
 
+let inputDate = document.querySelector("input[name='date']");
+
 function closeElement(event,elementsOpen, elementClose){
     let checking = elementsOpen.filter((elem)=>event.composedPath().includes(elem));
     if (checking.length===0) {
@@ -104,7 +106,19 @@ function getDateNow(addWordYear){
     return dateNow;
 }
 
+function getDateYMD(){
+    let date = new Date();
+    let month = date.getMonth();
+    month++;
+    if(month<10)
+        month="0"+month;
+    let dateNow = date.getFullYear() + "-" + month + "-" + date.getDate();
+    return dateNow;
+}
+
 window.onload = () => {
+    inputDate.value = getDateYMD();
+
     copyright.innerHTML = new Date().getFullYear()+" ©";
     notepadDateNow.innerHTML = getDateNow(true);
 
@@ -132,4 +146,3 @@ window.onload = () => {
         closeElement(e, [btnSettings,popupSettings], popupContainerSettings);
     })
 }
-

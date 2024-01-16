@@ -1,5 +1,3 @@
-<?php ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +14,7 @@
         <h2>
             <span class="logIn">Войти</span> или <span class="signUp activeTitle">зарегистрироваться</span>
         </h2>
-        <form action="/ss" method="POST" class="formAuth">
+        <form action="../mySql/authorization.php" method="POST" class="formAuth">
             <div class="fieldForm fieldFormDisabled fieldName">
                 <label for="name">Имя пользователя</label>
                 <input type="text" name="name" id="name" minlength="1" maxlength="16">
@@ -34,14 +32,15 @@
                 <input type="password" name="confirm" id="confirm" minlength="6" maxlength="16">
             </div>
             <div> <button type="submit" name="submit">Войти</button>
-            <p class="errorPassword">Пароли не совпадают</p>
+            <p class="error">Пароли не совпадают</p>
             </div>
 
-            <input hidden value="login" name="typeForm">
+            <input hidden value="LOGIN" name="typeForm">
         </form>
     </div>
 </body>
 
 <script src="./source/validation.js"></script>
+<script src="./source/wrongAuth.js"></script>
 
 </html>
