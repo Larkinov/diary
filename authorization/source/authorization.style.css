@@ -124,7 +124,7 @@ h2{
     background-color: var(--interactive-color-active);
 }
 
-.formAuth .errorPassword{
+.formAuth .error{
     display: none;
     color: red;
     font-size: 14px;

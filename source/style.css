@@ -1,15 +1,15 @@
-:root{
+:root {
 
     /* color */
     --main-color: rgb(247, 241, 215);
     --notepad-color: rgb(252, 252, 252);
-    --interactive-color:#1C274C;
-    --interactive-color-hover:hsl(226, 41%, 47%);
-    --interactive-color-active:#001d7e;
-    --shadow-color:#1c274c7c;
-    --shadow-color-active:#1c33817c;
+    --interactive-color: #1C274C;
+    --interactive-color-hover: hsl(226, 41%, 47%);
+    --interactive-color-active: #001d7e;
+    --shadow-color: #1c274c7c;
+    --shadow-color-active: #1c33817c;
 
-    --popupShadow-color:rgba(0, 0, 0, 0.452);
+    --popupShadow-color: rgba(0, 0, 0, 0.452);
 
 
     /* font-size */
@@ -17,23 +17,23 @@
 
 
     /* font-family */
-    --main-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --main-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-family: var(--main-font-family);
 }
 
-body{
+body {
     background-color: var(--main-color);
 }
 
 
-.icon{
+.icon {
     padding: 2px;
     width: 32px;
     height: 32px;
@@ -43,15 +43,16 @@ body{
     border-radius: 8px;
 }
 
-.icon:hover{
+.icon:hover {
     background-color: var(--interactive-color-hover);
 }
-.icon:active{
+
+.icon:active {
     background-color: var(--interactive-color-active);
 }
 
 
-header{
+header {
     display: block;
     height: 60px;
     padding: 0 auto;
@@ -60,7 +61,7 @@ header{
     z-index: 1;
 }
 
-.header__container{
+.header__container {
     position: relative;
     display: flex;
     align-items: center;
@@ -69,24 +70,24 @@ header{
     margin: 0 auto;
 }
 
-.logo{
-    color:var(--interactive-color);
+.logo {
+    color: var(--interactive-color);
     text-transform: uppercase;
     cursor: pointer;
 }
 
-.iconBlock{
+.iconBlock {
     position: absolute;
     right: 0;
-    top:50%;
-    transform: translate(0,-50%);
+    top: 50%;
+    transform: translate(0, -50%);
     display: flex;
     gap: 8px;
 }
 
 
 
-.content{
+.content {
     display: block;
     min-height: 100%;
 }
@@ -95,23 +96,23 @@ header{
 
 
 
-.sidebar__container{
+.sidebar__container {
     position: fixed;
     display: none;
     z-index: 2;
-    right:0;
+    right: 0;
     left: 0;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
     background-color: var(--popupShadow-color);
 }
 
 
-.sidebar{
+.sidebar {
     position: absolute;
     left: 0;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
     width: 320px;
     background-color: var(--notepad-color);
     padding: 12px;
@@ -126,7 +127,7 @@ header{
 
 
 
-.notepad{
+.notepad {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -140,49 +141,49 @@ header{
     padding: 24px;
 }
 
-.notepad__title{
+.notepad__title {
     position: relative;
     font-size: 32px;
     text-align: center;
     font-weight: 600;
-    color:var(--interactive-color);
+    color: var(--interactive-color);
 }
 
-.notepad__textarea{
+.notepad__textarea {
     resize: none;
     width: 100%;
-    padding:8px;
+    padding: 8px;
     border: none;
     border-radius: 8px;
-    color:var(--interactive-color);
+    color: var(--interactive-color);
     font-size: 18px;
     flex-grow: 1;
 }
 
-.notepad__textarea:focus{
+.notepad__textarea:focus {
     outline: none;
 }
 
-.notepad__buttons{
+.notepad__buttons {
     display: flex;
     flex-direction: row;
     align-items: start;
     gap: 8px;
     position: absolute;
-    top:50%;
-    transform: translate(0,-50%);
+    top: 50%;
+    transform: translate(0, -50%);
     padding: 4px;
 }
 
-.notepad__burgerMenu{
+.notepad__burgerMenu {
     display: none;
 }
 
-.notepad__save{
+.notepad__save {
     display: inline-block;
 }
 
-form{
+form {
     width: 100%;
     min-height: 100%;
     flex-grow: 1;
@@ -190,7 +191,7 @@ form{
 }
 
 
-.blockNotes{
+.blockNotes {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -198,43 +199,44 @@ form{
     gap: 12px;
     width: 200px;
     left: -208px;
-    top:0;
+    top: 0;
     min-height: 75vh;
     max-height: 75vh;
     background-color: var(--notepad-color);
     border-radius: 8px;
     box-shadow: 0 4px 8px 1px var(--shadow-color);
-    padding:12px;
+    padding: 12px;
 }
 
-.blockNotes__titles{
+.blockNotes__titles {
     display: flex;
-    justify-content: space-between;    
+    justify-content: space-between;
 }
-.blockNotes__titles button{
+
+.blockNotes__titles button {
     background-color: var(--interactive-color);
     color: white;
     padding: 4px 8px;
     border-radius: 8px;
     font-size: 16px;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.blockNotes__titles button:hover{
+.blockNotes__titles button:hover {
     background-color: var(--interactive-color-hover);
 }
 
-.blockNotes__titles button:active{
+.blockNotes__titles button:active {
     background-color: var(--interactive-color-active);
 }
 
 
-.blockNotes__search{
+.blockNotes__search {
     padding: 4px 8px;
     font-size: 14px;
 }
 
-.blockNotes__container{
+.blockNotes__container {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -243,19 +245,21 @@ form{
     padding: 4px 8px;
     border: 1px solid var(--shadow-color);
     border-radius: 8px;
-    
+
 }
 
-.blockNotes__note{
+.blockNotes__note {
     cursor: pointer;
-    user-select:none;
+    user-select: none;
     padding: 4px 8px;
     transition: all 0.15s ease-in;
 }
-.blockNotes__note:hover{
+
+.blockNotes__note:hover {
     background-color: var(--shadow-color);
 }
-.blockNotes__note:active{
+
+.blockNotes__note:active {
     background-color: var(--shadow-color-active);
 }
 
@@ -263,32 +267,32 @@ form{
 
 
 
-footer{
+footer {
     position: absolute;
     display: block;
-    bottom:8px;
-    right:0;
-    left:0;
+    bottom: 8px;
+    right: 0;
+    left: 0;
     text-align: center;
     text-transform: uppercase;
 }
 
 
-.popupContainer{
+.popupContainer {
     position: fixed;
     justify-content: center;
     align-items: center;
     display: none;
     z-index: 3;
-    right:0;
+    right: 0;
     left: 0;
-    top:0;
-    bottom:0;
+    top: 0;
+    bottom: 0;
     background-color: var(--popupShadow-color);
-    padding:40px;
+    padding: 40px;
 }
 
-.popup{
+.popup {
     position: relative;
     display: block;
     min-width: 600px;
@@ -299,7 +303,7 @@ footer{
     padding: 20px;
 }
 
-.popupContent{
+.popupContent {
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -309,46 +313,83 @@ footer{
 .popupContent h2 {
     text-align: center;
 }
+
 .popupContent p {
     font-size: 16px;
     text-align: justify;
     margin: 4px;
 }
 
-.closePopup{
+.closePopup {
     position: absolute;
     text-transform: uppercase;
     color: white;
     font-size: 18px;
     right: -16px;
-    top:-16px;
+    top: -16px;
     z-index: 4;
 }
 
 
+.fieldForm{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+}
 
-@media (max-width:1700px) { 
-    .header__container{
+.settings__theme {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    height: 1em;
+    width: 2em;
+    border-radius: 1em;
+    box-shadow: inset -1em 0px 0px 0px rgba(192, 192, 192, 1);
+    background-color: white;
+    border: 1px solid rgba(192, 192, 192, 1);
+    outline: none;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+}
+
+.settings__theme:checked {
+    box-shadow: inset 1em 0px 0px 0px rgba(33, 150, 243, 0.5);
+    border: 1px solid rgba(33, 150, 243, 1);
+}
+
+.settings__theme:focus {
+    outline-width: 0;
+}
+
+
+@media (max-width:1700px) {
+    .header__container {
         width: 1000px;
     }
-    .notepad{
+
+    .notepad {
         width: 1000px;
         margin: 40px auto;
     }
 }
-@media (max-width:1500px) { 
-    .header__container{
+
+@media (max-width:1500px) {
+    .header__container {
         width: 800px;
-    } 
-    .notepad{
+    }
+
+    .notepad {
         width: 800px;
     }
 }
-@media (max-width:1300px) { 
-    .header__container{
+
+@media (max-width:1300px) {
+    .header__container {
         width: 600px;
     }
-    .notepad{
+
+    .notepad {
         width: 600px;
         margin: 24px auto;
     }
@@ -357,33 +398,35 @@ footer{
 
 
 @media (max-width:1100px) {
-    .content{
-        padding:0 40px;
+    .content {
+        padding: 0 40px;
     }
 
-    .header__container{
+    .header__container {
         width: 100%;
         height: 100%;
-        padding:0 40px;
+        padding: 0 40px;
     }
-    
-    .iconBlock{
+
+    .iconBlock {
         right: 40px;
     }
 
-    .notepad{
+    .notepad {
         width: 100%;
-        padding:12px;
+        padding: 12px;
         gap: 12px;
     }
-    .blockNotes{
+
+    .blockNotes {
         display: none;
     }
-    .notepad__burgerMenu{
+
+    .notepad__burgerMenu {
         display: inline-block;
     }
 
-    .popup{
+    .popup {
         width: 100%;
         height: 100%;
         min-width: 0;
@@ -394,73 +437,76 @@ footer{
 
 
 @media (max-width:768px) {
-    .content{
-        padding:0 20px;
+    .content {
+        padding: 0 20px;
     }
 
-    .header__container{
-        padding:0 20px;
+    .header__container {
+        padding: 0 20px;
     }
-    
-    .iconBlock{
+
+    .iconBlock {
         right: 20px;
     }
 
-    .notepad__title{
+    .notepad__title {
         font-size: 24px;
     }
-    .notepad__textarea{
+
+    .notepad__textarea {
         font-size: 16px;
-        padding:4px 8px;
+        padding: 4px 8px;
     }
 
-    .sidebar{
+    .sidebar {
         width: 240px;
         gap: 8px;
     }
-    .popupContainer{
-        padding:32px;
+
+    .popupContainer {
+        padding: 32px;
     }
 }
 
 
 
 @media (max-width:420px) {
-    .content{
-        padding:0 8px;
+    .content {
+        padding: 0 8px;
     }
 
-    .header__container{
-        padding:0 8px;
+    .header__container {
+        padding: 0 8px;
     }
 
-    .logo{
+    .logo {
         width: 100px;
         line-height: 24px;
     }
-    
-    .iconBlock{
+
+    .iconBlock {
         right: 8px;
     }
-    
-    .notepad{
+
+    .notepad {
         margin: 12px auto;
     }
-    .notepad__title{
+
+    .notepad__title {
         font-size: 18px;
         text-align: right;
     }
 
-    .sidebar{
+    .sidebar {
         width: 240px;
         gap: 4px;
     }
 
-    .popup{
+    .popup {
         padding: 8px;
     }
 
-    .popupContainer{
-        padding:24px;
+    .popupContainer {
+        padding: 24px;
     }
 }

@@ -1,6 +1,9 @@
 let delaySaveText = 1500;
 let textarea = document.querySelector(".notepad__textarea");
 
+let btnSave = document.querySelector(".notepad__save");
+let btnFormSubmit = document.querySelector("#btnSubmit");
+
 const KEY_TEXT = getDateNow(true);
 
 function saveTextInLocalStorage(event) {
@@ -25,6 +28,10 @@ function debounce(func, delay) {
     timeout = setTimeout(() => func.apply(context, args), delay);
   };
 }
+
+btnSave.addEventListener("click",()=>{
+  btnFormSubmit.click();
+})
 
 window.addEventListener("DOMContentLoaded", () => {
   getTextLocalStorage();

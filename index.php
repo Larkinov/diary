@@ -15,7 +15,7 @@
                 Simple Dialy
             </h2>
             <div class="iconBlock">
-                <a href="authorization/index.php"><img src="./source/img/log_in.png" alt="info" class="icon btnLogin"></a>
+                <a href="authorization/"><img src="./source/img/log_in.png" alt="info" class="icon btnLogin"></a>
 
                 <img src="./source/img/info.png" alt="info" class="icon btnInfo">
 
@@ -34,53 +34,6 @@
                 <input class="blockNotes__search" placeholder="Поиск записи" />
                 <div class="blockNotes__container">
                     <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
                 </div>
             </div>
         </div>
@@ -93,25 +46,6 @@
                 <input class="blockNotes__search" placeholder="Поиск записи" />
                 <div class="blockNotes__container">
                     <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
-                    <div class="blockNotes__note">note</div>
                 </div>
             </div>
             <div class="notepad__title">
@@ -122,8 +56,11 @@
 
                 <p class="notepad__dateNow"></p>
             </div>
-            <form action="" class="">
-                <textarea class="notepad__textarea">...</textarea>
+            <form action="./mySql/notes.php" method="POST">
+                <textarea class="notepad__textarea" name="text">...</textarea>
+                <input type="text" name="id" hidden value="<?php echo $_GET['id'] ?>">
+                <input type="text" name="date" hidden value="<?php echo $_GET['id'] ?>">
+                <button type="submit" style="position:absolute; background:red; left:-1000px" id="btnSubmit"></button>
             </form>
 
         </div>
@@ -150,25 +87,19 @@
             <button class="closePopup icon">x</button>
             <div class="popupContent">
                 <h2>Настройки</h2>
-                <p>Это простой дневник для написания записей в браузере. Все записи сохранятся на вашем компьютере.</p>
-                <p>Каждый новый день автоматически создается новая запись с нынешней датой. Если ничего не написать в этот день, то запись не будет сохранятся.</p>
-                <p>Также имеется возможность написания обычных заметок, которым можно дать название.</p>
+                <div class="fieldForm">
+                    <label for="theme">Темная тема</label>
+                    <input type="checkbox" id="theme" class="settings__theme">
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- <div class="popupContainerLogin popupContainer">
-        <div class="popupLogin popup">
-            <a href=- class="closePopup icon">x</a>
-            <div class="popupContent">
-                <h2>Вход</h2>
-                <p>Это простой дневник для написания записей в браузере. Все записи сохранятся на вашем компьютере.</p>
-            </div>
-        </div>
-    </div> -->
 </body>
 
 <script src="source/js/uiScript.js"></script>
 <script src="source/js/textareaLocalStorage.js"></script>
-<script src="source/js/saveTextInBase.js"></script>
+<script src="source/js/const.js" type="module" ></script>
+<script src="source/js/settings.js" type="module"></script>
 
 </html>
