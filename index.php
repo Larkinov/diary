@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -58,8 +58,8 @@
             </div>
             <form action="./mySql/notes.php" method="POST">
                 <textarea class="notepad__textarea" name="text">...</textarea>
-                <input type="text" name="id" hidden value="<?php echo $_GET['id'] ?>">
-                <input type="text" name="date" hidden value="<?php echo $_GET['id'] ?>">
+                <input type="text" name="id" hidden value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>">
+                <input type="text" name="date" hidden>
                 <button type="submit" style="position:absolute; background:red; left:-1000px" id="btnSubmit"></button>
             </form>
 
@@ -95,11 +95,27 @@
             </div>
         </div>
     </div>
+    <div class="popupContainerMessage popupContainer ">
+        <div class="popupMessage popup popupSmall">
+            <button class="closePopup icon">x</button>
+            <p class="popupMessage__message"></p>
+        </div>
+    </div>
+    <div class="popupContainerLogin popupContainer ">
+        <div class="popupLogin popup popupSmall">
+            <button class="closePopup icon">x</button>
+            <p class="textExit">Вы действительно хотите выйти из профиля?</p>
+            <div><button class="icon answer answerYes">Да</button>
+                <button class="icon answer answerNo">Нет</button>
+            </div>
+        </div>
+    </div>
 </body>
 
-<script src="source/js/uiScript.js"></script>
-<script src="source/js/textareaLocalStorage.js"></script>
-<script src="source/js/const.js" type="module" ></script>
-<script src="source/js/settings.js" type="module"></script>
+<script src="source/js/uiScript.js" type="module"></script>
+<script src="source/js/controlProfile.js" type="module"></script>
+<script src="source/js/const.js" type="module"></script>
+<script src="source/js/theme.js" type="module"></script>
+<script src="source/js/notes.js" type="module"></script>
 
 </html>

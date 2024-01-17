@@ -1,14 +1,85 @@
-export function getStyleTheme(){
+export function getTheme() {
+  const THEME = { name: "THEME", light: "LIGHT", dark: "DARK", value: "" };
+  if (localStorage.getItem(THEME.name))
+    THEME.value = localStorage.getItem(THEME.name);
+  else THEME.value = THEME.light;
+  return THEME;
+}
+
+export function setTheme(theme) {
+  localStorage.setItem(theme.name, theme.value);
+}
+
+export function getStyleTheme() {
   const STYLE_THEME = {
-    MAIN_COLOR: ["--main-color", "rgb(247, 241, 215)","rgb(1, 1, 1)"],
-    NOTEPAD_COLOR: ["--notepad-color", "rgb(252, 252, 252)"],
-    INTERACTIVE_COLOR: ["--interactive-color", "#1C274C"],
-    INTERACTIVE_COLOR_HOVER: ["--interactive-color-hover", "hsl(226, 41%, 47%)"],
-    INTERACTIVE_COLOR_ACTIVE: ["--interactive-color-active", "#001d7e"],
-    SHADOW_COLOR: ["--shadow-color", "#1c274c7c"],
-    SHADOW_COLOR_ACTIVE: ["--shadow-color-active", "#1c33817c"],
-    POPUPSHADOW_COLOR: ["--popupShadow-color", "rgba(0, 0, 0, 0.452)"],
-  
+    MAIN_COLOR: ["--main-color", "rgb(247, 241, 215)", "#1C274C"],
+    NOTEPAD_COLOR: [
+      "--notepad-color",
+      "rgb(252, 252, 252)",
+      "hsl(226, 41%, 47%)",
+    ],
+    NOTEPAD_TEXTAREA_COLOR: ["--notepad-textarea-color", "white", "#1C274C"],
+    INTERACTIVE_COLOR: ["--interactive-color", "#1C274C", "rgb(247, 241, 215)"],
+    INTERACTIVE_COLOR_HOVER: [
+      "--interactive-color-hover",
+      "hsl(226, 41%, 47%)",
+      "rgb(217, 211, 185)",
+    ],
+    INTERACTIVE_COLOR_ACTIVE: [
+      "--interactive-color-active",
+      "#001d7e",
+      "rgb(227, 221, 210)",
+    ],
+    SHADOW_COLOR: ["--shadow-color", "#1c274c7c", "rgb(57, 51, 55)"],
+    SHADOW_COLOR_ACTIVE: [
+      "--shadow-color-active",
+      "#1c33817c",
+      "rgb(87, 81, 85)",
+    ],
+    POPUPSHADOW_COLOR: [
+      "--popupShadow-color",
+      "rgba(0, 0, 0, 0.452)",
+      "rgba(0, 0, 0, 0.452)",
+    ],
+
+    WHITE_TEXT: ["--white-text", "white", "black"],
   };
   return STYLE_THEME;
+}
+
+export function getDarkImage() {
+  const DARK_IMAGES = {
+    burgerMenu: ["burger-menu", "burger-menu-dark"],
+    save: ["save", "save-dark"],
+    settings: ["settings", "settings-dark"],
+    info: ["info", "info-dark"],
+    authorization: ["log_in", "log_in-dark"],
+    exit: ["exit", "exit-dark"],
+  };
+  return DARK_IMAGES;
+}
+
+export function getMessage(){
+  const MESSAGE = {
+    error_save_withoutLogin:"Вы не вошли в систему!",
+    success_signup:"Вы успешно зарегистрированы!",
+    success_login:"Вы вошли в профиль",
+  }
+  return MESSAGE;
+}
+
+export function getID(){
+  if(localStorage.getItem("ID"))
+    return localStorage.getItem("ID");
+  else
+    return "";
+}
+
+export function setID(id){
+  localStorage.setItem("ID",id);
+}
+export function deleteID(date){
+  localStorage.removeItem("ID");
+  localStorage.removeItem(date);
+  document.location.href = "/";
 }

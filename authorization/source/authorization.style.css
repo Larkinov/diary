@@ -1,15 +1,18 @@
-:root{
+:root {
 
     /* color */
     --main-color: rgb(247, 241, 215);
     --notepad-color: rgb(252, 252, 252);
-    --interactive-color:#1C274C;
-    --interactive-color-hover:hsl(226, 41%, 47%);
-    --interactive-color-active:#001d7e;
-    --shadow-color:#1c274c7c;
-    --shadow-color-active:#1c33817c;
+    --notepad-textarea-color: white;
+    --interactive-color: #1C274C;
+    --interactive-color-hover: hsl(226, 41%, 47%);
+    --interactive-color-active: #001d7e;
+    --shadow-color: #1c274c7c;
+    --shadow-color-active: #1c33817c;
 
-    --popupShadow-color:rgba(0, 0, 0, 0.452);
+    --white-text:white;
+
+    --popupShadow-color: rgba(0, 0, 0, 0.452);
 
 
     /* font-size */
@@ -17,7 +20,7 @@
 
 
     /* font-family */
-    --main-font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --main-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -40,7 +43,7 @@ body{
     background-color: var(--interactive-color);
     transition: all 0.15s ease-in;
     border-radius: 8px;
-    color: white;
+    color: var(--white-text);
     text-transform: uppercase;
     font-size: 18px;
 }
@@ -65,6 +68,7 @@ h2{
     text-align: center;
     margin-bottom: 12px;
     word-wrap: break-word;
+    color: var(--interactive-color);
 }
 
 .activeTitle{
@@ -87,6 +91,10 @@ h2{
     gap: 8px;
     width: 100%;
     padding:0 24px;
+}
+
+label{
+    color: var(--interactive-color);
 }
 
 .fieldForm{
@@ -112,7 +120,7 @@ h2{
     min-width: 100px;
     padding:4px 12px;
     background-color: var(--interactive-color);
-    color: white;
+    color: var(--white-text);
     transition: all 0.15s ease-in;
     word-wrap: break-word;
 }
