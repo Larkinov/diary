@@ -25,7 +25,6 @@ function init() {
 
   let theme = getTheme();
   let styleTheme = getStyleTheme();
-  console.log(theme.value);
   changeTheme(theme.value);
 }
 

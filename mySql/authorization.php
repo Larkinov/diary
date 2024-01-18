@@ -2,7 +2,6 @@
 
 require_once("./utils.php");
 
-
 function signup($conn, $data)
 {
     //checking for a dublicate login
@@ -15,12 +14,12 @@ function signup($conn, $data)
             try {
                 $sql = "INSERT INTO " . NAME_TABLE_USERS . " (name, login, password) VALUES ('" . $data['name'] . "','" . $data['login'] . "','" . $data['password'] . "')";
                 $conn->exec($sql);
-                header("Location:/?id=" . $conn->lastInsertId()."&auth=1");
+                header("Location:/?id=" . $conn->lastInsertId() . "&auth=1");
             } catch (\Throwable $th) {
                 outputError("Error insert database: " . $th->getMessage());
             }
-        }else
-        header("Location:/authorization?wrong=3");
+        } else
+            header("Location:/authorization?wrong=3");
     } catch (\Throwable $th) {
         outputError("Error select database:" . $th->getMessage());
     }
@@ -34,9 +33,9 @@ function login($conn, $data)
         $result = $conn->query($sql);
         $row = $result->fetch();
         if (!empty($row)) {
-            if ($row['password'] === $data['password'])
-                header("Location:/?id=" . $row['id']."&auth=2");
-            else {
+            if ($row['password'] === $data['password']) {
+                header("Location:/?id=" . $row['id'] . "&auth=2");
+            } else {
                 header("Location:/authorization?wrong=1");
             }
         } else
@@ -46,7 +45,7 @@ function login($conn, $data)
     }
 }
 
-function init()
+function auth()
 {
     $connection = connectionBD();
 
@@ -71,4 +70,4 @@ function init()
         signup($connection, $data);
 }
 
-init();
+auth();

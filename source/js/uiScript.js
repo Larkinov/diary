@@ -20,7 +20,6 @@ let btnSave = document.querySelector(".notepad__save");
 let btnFormSubmit = document.querySelector("#btnSubmit");
 let popupMessage = document.querySelector(".popupMessage");
 let popupContainerMessage = document.querySelector(".popupContainerMessage");
-let message = document.querySelector(".popupMessage__message");
 
 let closePopup = document.querySelectorAll(".closePopup");
 
@@ -132,6 +131,17 @@ function getDateYMD() {
   return dateNow;
 }
 
+function clickOpenPopup(btn, popup){
+  btn.addEventListener("click", () => {
+    popup.style = "display:flex";
+  });
+}
+
+export function openMessagePopup(message){
+  popupContainerMessage.style = "display:flex";
+  document.querySelector(".popupMessage__message").innerHTML = message;
+}
+
 window.onload = () => {
 
   inputDate.value = getDateYMD();
@@ -148,17 +158,12 @@ window.onload = () => {
     });
   });
 
-  btnLogin.addEventListener("click", () => {
-    popupContainerLogin.style = "display:flex";
-  });
-  btnInfo.addEventListener("click", () => {
-    popupContainerInfo.style = "display:flex";
-  });
-  btnSettings.addEventListener("click", () => {
-    popupContainerSettings.style = "display:flex";
-  });
+  clickOpenPopup(btnInfo,popupContainerInfo);
+  clickOpenPopup(btnSettings,popupContainerSettings);
+  clickOpenPopup(btnSidebar,sidebarContainer);
+
   btnLogin.addEventListener("click", (e) => {
-    if(getID()){
+    if(getID()!=="null"){
       e.preventDefault();
       popupContainerLogin.style = "display:flex";
     }
@@ -172,17 +177,13 @@ window.onload = () => {
   });
 
   btnSave.addEventListener("click", () => {
-    if (getID()){
+    if (getID()!=="null"){
       inputID.value = getID();
       btnFormSubmit.click();
     }
     else {
-      popupContainerMessage.style = "display:flex";
-      message.innerHTML = getMessage().error_save_withoutLogin;
+      openMessagePopup(getMessage().error_save_withoutLogin);
     }
-  });
-  btnSidebar.addEventListener("click", () => {
-    sidebarContainer.style = "display:block";
   });
 
   document.addEventListener("click", (e) => {

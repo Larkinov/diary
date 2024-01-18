@@ -59,27 +59,57 @@ export function getDarkImage() {
   return DARK_IMAGES;
 }
 
-export function getMessage(){
+export function getMessage() {
   const MESSAGE = {
-    error_save_withoutLogin:"Вы не вошли в систему!",
-    success_signup:"Вы успешно зарегистрированы!",
-    success_login:"Вы вошли в профиль",
-  }
+    error_save_withoutLogin: "Вы не вошли в систему!",
+    success_signup: "Вы успешно зарегистрированы!",
+    success_login: "Вы вошли в профиль",
+    success_update: "Запись обновлена",
+    success_add: "Новая запись добавлена",
+  };
   return MESSAGE;
 }
 
-export function getID(){
-  if(localStorage.getItem("ID"))
-    return localStorage.getItem("ID");
-  else
-    return "";
+export function getTypeNote() {
+  const TYPE_NOTE = {
+    name: "TYPE_NOTE",
+    DAIRY: "DAIRY",
+    NOTES: "NOTES",
+    value: "",
+  };
+  if (localStorage.getItem(TYPE_NOTE.name))
+    TYPE_NOTE.value = localStorage.getItem(TYPE_NOTE.name);
+  else TYPE_NOTE.value = TYPE_NOTE.DAIRY;
+  return TYPE_NOTE;
+}
+export function setTypeNote(typeNote) {
+  localStorage.setItem(typeNote.name, typeNote.value);
 }
 
-export function setID(id){
-  localStorage.setItem("ID",id);
+export function getID() {
+  if (localStorage.getItem("ID") !== "null") return localStorage.getItem("ID");
+  else return "null";
 }
-export function deleteID(date){
+
+export function setID(id) {
+  localStorage.setItem("ID", id);
+  document.cookie = "id=" + id;
+}
+export function deleteID(date) {
   localStorage.removeItem("ID");
   localStorage.removeItem(date);
+  document.cookie = "id=null";
   document.location.href = "/";
 }
+
+function init() {
+  if (new URL(window.location.href).searchParams.get("id") === null) {
+    if (getID() === "null" || getID() === null) {
+      setID("null");
+    }
+  } else {
+    setID(new URL(window.location.href).searchParams.get("id"));
+  }
+}
+
+init();

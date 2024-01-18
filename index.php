@@ -1,3 +1,7 @@
+<?php
+
+require_once("./mySql/loadingNotes.php");
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -6,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="source/style.css">
     <title>Дневник</title>
+    <script src="source/js/const.js" type="module"></script>
 </head>
 
 <body>
@@ -32,9 +37,8 @@
                     <button>Заметки</button>
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
-                <div class="blockNotes__container">
-                    <div class="blockNotes__note">note</div>
-                </div>
+                <?php loading_notes() ?>
+
             </div>
         </div>
         <div class="notepad">
@@ -44,9 +48,8 @@
                     <button>Заметки</button>
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
-                <div class="blockNotes__container">
-                    <div class="blockNotes__note">note</div>
-                </div>
+                <?php loading_notes() ?>
+
             </div>
             <div class="notepad__title">
                 <div class="notepad__buttons">
@@ -56,7 +59,7 @@
 
                 <p class="notepad__dateNow"></p>
             </div>
-            <form action="./mySql/notes.php" method="POST">
+            <form action="./mySql/addUpdateNote.php" method="POST">
                 <textarea class="notepad__textarea" name="text">...</textarea>
                 <input type="text" name="id" hidden value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>">
                 <input type="text" name="date" hidden>
@@ -114,7 +117,6 @@
 
 <script src="source/js/uiScript.js" type="module"></script>
 <script src="source/js/controlProfile.js" type="module"></script>
-<script src="source/js/const.js" type="module"></script>
 <script src="source/js/theme.js" type="module"></script>
 <script src="source/js/notes.js" type="module"></script>
 

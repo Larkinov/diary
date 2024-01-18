@@ -1,5 +1,5 @@
-import { setID, getMessage } from "./const.js";
-import { getDateNow } from "./uiScript.js";
+import { getMessage, getID } from "./const.js";
+import { getDateNow, openMessagePopup } from "./uiScript.js";
 
 let delaySaveText = 1500;
 let textarea = document.querySelector(".notepad__textarea");
@@ -33,16 +33,14 @@ function debounce(func, delay) {
 
 function checkSignUp() {
   let isAuth = new URL(window.location.href).searchParams.get("auth");
-  if (isAuth) {
-    setID(new URL(window.location.href).searchParams.get("id"));
-    isAuth === 1
-      ? (message.innerHTML = getMessage().success_signup)
-      : (message.innerHTML = getMessage().success_login);
+  if (isAuth || getID()!=="null") {
+    if (isAuth === 1) openMessagePopup(getMessage().success_signup);
+    if (isAuth === 2) openMessagePopup(getMessage().success_login);
     btnLogin.src = btnLogin.src.replace("log_in", "exit");
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+function control(){
   checkSignUp();
   getTextLocalStorage();
 
@@ -53,4 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
   textarea.addEventListener("focus", (event) => {
     if (event.target.value === "...") event.target.value = "";
   });
-});
+}
+
+control();
