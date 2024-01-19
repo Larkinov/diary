@@ -14,6 +14,7 @@ require_once("./mySql/loadingNotes.php");
 </head>
 
 <body>
+    <?php loading_notes() ?>
     <header>
         <div class="header__container">
             <h2 class="logo">
@@ -33,23 +34,26 @@ require_once("./mySql/loadingNotes.php");
         <div class="sidebar__container">
             <div class="sidebar">
                 <div class="blockNotes__titles">
-                    <button>Дневник</button>
-                    <button>Заметки</button>
+
+                    <button class="blockNotes__btnDairy">Дневник</button>
+                    <button class="blockNotes__btnNotes">Заметки</button>
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
-                <?php loading_notes() ?>
-
+                <div class='blockNotes__container'>
+                    <img src="./source/img/add.png" alt="add" class="icon blockNotes__btnAddNote">
+                </div>
             </div>
         </div>
         <div class="notepad">
             <div class="blockNotes">
                 <div class="blockNotes__titles">
-                    <button>Дневник</button>
-                    <button>Заметки</button>
+                    <button class="blockNotes__btnDairy">Дневник</button>
+                    <button class="blockNotes__btnNotes">Заметки</button>
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
-                <?php loading_notes() ?>
-
+                <div class='blockNotes__container'>
+                    <img src="./source/img/add.png" alt="add" class="icon blockNotes__btnAddNote">
+                </div>
             </div>
             <div class="notepad__title">
                 <div class="notepad__buttons">
@@ -57,12 +61,14 @@ require_once("./mySql/loadingNotes.php");
                     <img src="./source/img/save.png" alt="save" class="icon notepad__save">
                 </div>
 
-                <p class="notepad__dateNow"></p>
+                <p class="notepad__titleNote"></p>
             </div>
             <form action="./mySql/addUpdateNote.php" method="POST">
                 <textarea class="notepad__textarea" name="text">...</textarea>
                 <input type="text" name="id" hidden value="<?php if (isset($_GET['id'])) echo $_GET['id']; ?>">
                 <input type="text" name="date" hidden>
+                <input type="text" name="typeNote" hidden>
+                <input type="text" name="title" hidden>
                 <button type="submit" style="position:absolute; background:red; left:-1000px" id="btnSubmit"></button>
             </form>
 
@@ -113,11 +119,25 @@ require_once("./mySql/loadingNotes.php");
             </div>
         </div>
     </div>
+    <div class="popupContainerAddNote popupContainer ">
+        <div class="popupAddNote popup popupSmallSimple">
+            <button class="closePopup icon">x</button>
+            <div class="popupContent">
+                <h3>Создание новой записи</h3>
+                <div class="formAddNewNote">
+                    <label for="titleNewNote">Название</label>
+                    <input type="text" id="titleNewNote" name="titleNewNote" class="btntitleNewNote">
+                    <a class="formAddNewNote__btn">Добавить</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
+<script src="source/js/loadingNotes.js" type="module"></script>
 <script src="source/js/uiScript.js" type="module"></script>
 <script src="source/js/controlProfile.js" type="module"></script>
 <script src="source/js/theme.js" type="module"></script>
-<script src="source/js/notes.js" type="module"></script>
 
 </html>

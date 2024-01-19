@@ -55,6 +55,7 @@ export function getDarkImage() {
     info: ["info", "info-dark"],
     authorization: ["log_in", "log_in-dark"],
     exit: ["exit", "exit-dark"],
+    add: ["add", "add-dark"],
   };
   return DARK_IMAGES;
 }

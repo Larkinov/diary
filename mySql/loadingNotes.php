@@ -7,11 +7,8 @@ function getNotes($connection, $id)
         $sql = "SELECT * FROM " . NAME_TABLE_TEXTS . " WHERE id_user=" . $id;
         $result = $connection->query($sql);
         while ($row = $result->fetch()) {
-            print_r($row['text']);
+            echo " <textarea class='hiddenTextarea' hidden data-titleNote='".$row['title']."' data-typeNote='".$row['type']."'>$row[text]</textarea>";
         }
-        // if (!empty($row)) {
-        //     return false;
-        // }
     } catch (\Throwable $th) {
         outputError("Error select database:" . $th->getMessage());
     }
@@ -31,26 +28,6 @@ function loading_notes()
 {
     if (checkID()) {
         $connection = connectionBD();
-
-        $notes = getNotes($connection, checkID());
-
-        echo "<div class='blockNotes__container'>
-                    <div class='blockNotes__note'>note</div>
-                    </div>";
-        // header("Location:/?id=" . $id ."&auth=2");
-        // $data = [
-        //     "id" => $_POST['id'],
-        //     "text" => $_POST['text'],
-        //     "date" => $_POST['date'],
-        // ];
-        // if (hasNote($connection, $data))
-        //     if (updateNote($connection, $data))  header("Location:/?success=1");
-        //     else header("Location:/?success=0");
-        // elseif (addNote($connection, $data)) header("Location:/?success=2");
-        // else header("Location:/?success=0");
-    }else{
-        echo "<div class='blockNotes__container'>
-        <div class='blockNotes__note'>note</div>
-        </div>";
+        getNotes($connection, checkID());
     }
 }
