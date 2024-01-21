@@ -4,7 +4,7 @@ require_once("./utils.php");
 function hasNote($conn, $data)
 {
     try {
-        $sql = "SELECT * FROM " . NAME_TABLE_TEXTS . " WHERE date='" . $data['date'] . "' AND id_user=".$data['id']." AND type='".$data['type']."'";
+        $sql = "SELECT * FROM " . NAME_TABLE_TEXTS . " WHERE date='" . $data['date'] . "' AND id_user=".$data['id']." AND type='".$data['type']."'"." AND title='".$data['title']."'";
         $result = $conn->query($sql);
         $row = $result->fetch();
         if (empty($row)) {
@@ -19,12 +19,11 @@ function hasNote($conn, $data)
 function updateNote($conn, $data)
 {
     try {
-        $sql = "UPDATE " . NAME_TABLE_TEXTS . " SET text =:text, title =:title WHERE date='" . $data['date'] . "' AND id_user=".$data['id']." AND type='".$data['type']."'";
+        $sql = "UPDATE " . NAME_TABLE_TEXTS . " SET text =:text, title =:title WHERE date='" . $data['date'] . "' AND id_user=".$data['id']." AND type='".$data['type']."'" ." AND title='".$data['title']."'";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(":text", $data['text']);
         $stmt->bindValue(":title", $data['title']);
         $result = $stmt->execute();
-        print_r($data);
         return $result;
     } catch (\Throwable $th) {
         outputError("Error update database:" . $th->getMessage());

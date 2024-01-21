@@ -5,10 +5,12 @@ import {
   getTypeNote,
   setTypeNote,
 } from "./const.js";
+import { addNewNote } from "./loadingNotes.js";
 
 let copyright = document.querySelector(".copyright");
 
 let notepadTitleNote = document.querySelector(".notepad__titleNote");
+let blockNotes = document.querySelectorAll(".blockNotes__container");
 
 let btnInfo = document.querySelector(".btnInfo");
 let popupInfo = document.querySelector(".popupInfo");
@@ -41,6 +43,9 @@ let inputDate = document.querySelector("input[name='date']");
 let inputID = document.querySelector("input[name='id']");
 let inputTypeNote = document.querySelector("input[name='typeNote']");
 let inputTitle = document.querySelector("input[name='title']");
+
+let inputNewNoteTitle = document.querySelector("input[name='titleNewNote']");
+let errorInputNewNote = document.querySelector(".titleNewNote__error");
 
 let btnsTypeNote = document.querySelectorAll(".blockNotes__btnNotes");
 let btnsTypeDairy = document.querySelectorAll(".blockNotes__btnDairy");
@@ -160,7 +165,10 @@ function getTitle() {
 function clickOpenPopup(btn, popup) {
   btn.forEach((elem) => {
     elem.addEventListener("click", () => {
-      popup.style = "display:flex";
+      if (elem.classList.contains("blockNotes__btnAddNote")) {
+        if (getID() !== "null") popup.style = "display:flex";
+        else openMessagePopup(getMessage().error_save_withoutLogin);
+      } else popup.style = "display:flex";
     });
   });
 }
@@ -174,10 +182,11 @@ function hideNote(type) {
 
 function clickTypeNote(btns, hideType) {
   let typeNote = getTypeNote();
-  typeNote.value = hideType;
+  hideType === typeNote.DAIRY ? typeNote.value = typeNote.NOTES : typeNote.value = typeNote.NOTES;
+  hideType;
   btns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      if (typeNote.value === typeNote.NOTES) {
+      if (hideType === typeNote.NOTES) {
         btnAddNote.forEach((btn) => {
           btn.style = "display:none";
         });
@@ -186,13 +195,24 @@ function clickTypeNote(btns, hideType) {
           btn.style = "display:block";
         });
       setTypeNote(typeNote);
-      hideNote(typeNote.value);
+      hideNote(hideType);
     });
   });
 }
 
-function clickAddNewNote(){
-  console.log("clickasdas");
+function clickAddNewNote() {
+  if (!inputNewNoteTitle.value)
+    errorInputNewNote.style = "display:inline-block";
+  else {
+    popupContainerAddNote.style = "display:none";
+    addNewNote(inputNewNoteTitle.value,getTypeNote().NOTES);
+    inputNewNoteTitle.value = "";
+    openMessagePopup("ЗАПИСЬ УСПЕШНО ДОБАВЛЕНА!");
+  }
+
+  inputNewNoteTitle.addEventListener("focus", () => {
+    errorInputNewNote.style = "display:none";
+  });
 }
 
 export function openMessagePopup(message) {
@@ -239,13 +259,13 @@ window.onload = () => {
     popupContainerLogin.style = "display:none";
   });
 
-  btnAddNewNote.addEventListener("click",clickAddNewNote)
+  btnAddNewNote.addEventListener("click", clickAddNewNote);
 
   btnSave.addEventListener("click", () => {
     if (getID() !== "null") {
       inputID.value = getID();
       inputTypeNote.value = getTypeNote().value;
-      inputTitle.value = getDateNow(true);
+      inputTitle.value = notepadTitleNote.innerHTML;
       btnFormSubmit.click();
     } else {
       openMessagePopup(getMessage().error_save_withoutLogin);
@@ -256,7 +276,11 @@ window.onload = () => {
     closeElement(e, [btnSidebar, sidebar], sidebarContainer);
     closeElement(e, [btnInfo, popupInfo], popupContainerInfo);
     closeElement(e, [btnSettings, popupSettings], popupContainerSettings);
-    closeElement(e, [btnSave, popupMessage], popupContainerMessage);
+    closeElement(
+      e,
+      [btnSave, popupMessage, ...btnAddNote, btnAddNewNote],
+      popupContainerMessage
+    );
     closeElement(e, [btnLogin, popupLogin], popupContainerLogin);
     closeElement(e, [...btnAddNote, popupAddNote], popupContainerAddNote);
   });

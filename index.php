@@ -127,7 +127,9 @@ require_once("./mySql/loadingNotes.php");
                 <div class="formAddNewNote">
                     <label for="titleNewNote">Название</label>
                     <input type="text" id="titleNewNote" name="titleNewNote" class="btntitleNewNote">
-                    <a class="formAddNewNote__btn">Добавить</a>
+                    <div class="formAddNewNote__blockBtn"><a class="formAddNewNote__btn">Добавить</a>
+                        <p class="titleNewNote__error">Введите название</p>
+                    </div>
                 </div>
 
             </div>

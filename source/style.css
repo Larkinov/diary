@@ -401,6 +401,11 @@ footer {
     align-items: start;  
     gap: 4px;
 }
+
+/* .formAddNewNote__blockBtn{
+    display: block;
+} */
+
 .formAddNewNote input{
    
     padding:4px 8px;
@@ -421,6 +426,13 @@ footer {
     text-align: center;
     font-weight: 700;
     margin-top: 8px;
+    display: inline-block;
+}
+
+.titleNewNote__error{
+    display: none;
+    color:red;
+    margin-top: 8px !important;
 }
 
 .settings__theme {
