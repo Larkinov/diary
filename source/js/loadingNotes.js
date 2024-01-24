@@ -1,5 +1,5 @@
 import { getMessage } from "./const.js";
-import { openMessagePopup,} from "./uiScript.js";
+import { openMessagePopup} from "./eventsUI.js";
 
 let blockNotes = document.querySelectorAll(".blockNotes__container");
 let alltextareaHidden = document.querySelectorAll(".hiddenTextarea");

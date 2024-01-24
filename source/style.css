@@ -319,26 +319,11 @@ footer {
     max-height: 200px;
     min-width: 300px;
     min-height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.popupSmallSimple {
-    max-width: 300px;
-    max-height: 200px;
-    min-width: 300px;
-    min-height: 200px;
-}
-
-.popupMessage__message{
-    color: var(--interactive-color);
-    font-size: 18px;
-    text-transform: uppercase;
-    text-align: center;
 }
 
 .popupContent {
+    display: none;
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -357,6 +342,26 @@ footer {
     margin: 4px;
 }
 
+.popupMessage{
+    width: 100%;
+    min-height: 100%;
+}
+
+.popupMessage_block{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.popupMessage__message{
+    color: var(--interactive-color);
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center !important;
+    width: 100%;
+    height: 100%;
+}
+
+
 .closePopup {
     position: absolute;
     text-transform: uppercase;
@@ -368,13 +373,17 @@ footer {
 }
 
 .popupLogin {
-    display: flex;
     flex-direction: column;
     gap: 4px;
 }
 .popupLogin .textExit{
     color: var(--interactive-color);
     text-align: center;
+}
+.popupLogin__answers{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
 }
 .popupLogin .answer{
     min-width: 100px;

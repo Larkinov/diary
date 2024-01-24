@@ -1,5 +1,6 @@
 import { getMessage, getID } from "./const.js";
-import { getDateNow, openMessagePopup } from "./uiScript.js";
+import { openMessagePopup } from "./eventsUI.js";
+import { getDateNow } from "./uiScript.js";
 
 let delaySaveText = 1000;
 let textarea = document.querySelector(".notepad__textarea");
@@ -39,8 +40,8 @@ function debounce(func, delay) {
 function checkSignUp() {
   let isAuth = new URL(window.location.href).searchParams.get("auth");
   if (isAuth || getID() !== "null") {
-    if (isAuth === 1) openMessagePopup(getMessage().success_signup);
-    if (isAuth === 2) openMessagePopup(getMessage().success_login);
+    if (isAuth == 1) openMessagePopup(getMessage().success_signup);
+    if (isAuth == 2) openMessagePopup(getMessage().success_login);
     btnLogin.src = btnLogin.src.replace("log_in", "exit");
   }
 }

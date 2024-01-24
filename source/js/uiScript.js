@@ -5,6 +5,7 @@ import {
   getTypeNote,
   setTypeNote,
 } from "./const.js";
+import { closeAllPopup, openMessagePopup, openPopup } from "./eventsUI.js";
 import { addNewNote } from "./loadingNotes.js";
 
 let copyright = document.querySelector(".copyright");
@@ -12,32 +13,12 @@ let copyright = document.querySelector(".copyright");
 let notepadTitleNote = document.querySelector(".notepad__titleNote");
 let blockNotes = document.querySelectorAll(".blockNotes__container");
 
-let btnInfo = document.querySelector(".btnInfo");
-let popupInfo = document.querySelector(".popupInfo");
-let popupContainerInfo = document.querySelector(".popupContainerInfo");
-
-let btnSettings = document.querySelector(".btnSettings");
-let popupSettings = document.querySelector(".popupSettings");
-let popupContainerSettings = document.querySelector(".popupContainerSettings");
-
 let btnLogin = document.querySelector(".btnLogin");
-let popupLogin = document.querySelector(".popupLogin");
-let popupContainerLogin = document.querySelector(".popupContainerLogin");
 
 let btnAddNote = [...document.querySelectorAll(".blockNotes__btnAddNote")];
-let popupAddNote = document.querySelector(".popupAddNote");
-let popupContainerAddNote = document.querySelector(".popupContainerAddNote");
 
 let btnSave = document.querySelector(".notepad__save");
 let btnFormSubmit = document.querySelector("#btnSubmit");
-let popupMessage = document.querySelector(".popupMessage");
-let popupContainerMessage = document.querySelector(".popupContainerMessage");
-
-let closePopup = document.querySelectorAll(".closePopup");
-
-let sidebarContainer = document.querySelector(".sidebar__container");
-let sidebar = document.querySelector(".sidebar");
-let btnSidebar = document.querySelector(".notepad__burgerMenu");
 
 let inputDate = document.querySelector("input[name='date']");
 let inputID = document.querySelector("input[name='id']");
@@ -51,15 +32,6 @@ let btnsTypeNote = document.querySelectorAll(".blockNotes__btnNotes");
 let btnsTypeDairy = document.querySelectorAll(".blockNotes__btnDairy");
 
 let btnAddNewNote = document.querySelector(".formAddNewNote__btn");
-
-function closeElement(event, elementsOpen, elementClose) {
-  let checking = elementsOpen.filter((elem) =>
-    event.composedPath().includes(elem)
-  );
-  if (checking.length === 0) {
-    elementClose.style = "display:none";
-  }
-}
 
 function getRuNameMonth(month) {
   let nameMonth = "";
@@ -162,17 +134,6 @@ function getTitle() {
   else return note.dataset.titlenote;
 }
 
-function clickOpenPopup(btn, popup) {
-  btn.forEach((elem) => {
-    elem.addEventListener("click", () => {
-      if (elem.classList.contains("blockNotes__btnAddNote")) {
-        if (getID() !== "null") popup.style = "display:flex";
-        else openMessagePopup(getMessage().error_save_withoutLogin);
-      } else popup.style = "display:flex";
-    });
-  });
-}
-
 function hideNote(type) {
   document.querySelectorAll(".blockNotes__note").forEach((note) => {
     if (note.dataset.typenote === type) note.style = "display:none";
@@ -182,8 +143,9 @@ function hideNote(type) {
 
 function clickTypeNote(btns, hideType) {
   let typeNote = getTypeNote();
-  hideType === typeNote.DAIRY ? typeNote.value = typeNote.NOTES : typeNote.value = typeNote.NOTES;
-  hideType;
+  hideType === typeNote.DAIRY
+    ? (typeNote.value = typeNote.NOTES)
+    : (typeNote.value = typeNote.DAIRY);
   btns.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (hideType === typeNote.NOTES) {
@@ -204,84 +166,57 @@ function clickAddNewNote() {
   if (!inputNewNoteTitle.value)
     errorInputNewNote.style = "display:inline-block";
   else {
-    popupContainerAddNote.style = "display:none";
-    addNewNote(inputNewNoteTitle.value,getTypeNote().NOTES);
-    inputNewNoteTitle.value = "";
-    openMessagePopup("ЗАПИСЬ УСПЕШНО ДОБАВЛЕНА!");
+    closeAllPopup();
+    if (getID() !== "null") {
+      addNewNote(inputNewNoteTitle.value, getTypeNote().NOTES);
+      inputNewNoteTitle.value = "";
+      openMessagePopup(getMessage().success_add);
+    }else
+    openMessagePopup(getMessage().error_save_withoutLogin);
   }
-
-  inputNewNoteTitle.addEventListener("focus", () => {
-    errorInputNewNote.style = "display:none";
-  });
 }
 
-export function openMessagePopup(message) {
-  popupContainerMessage.style = "display:flex";
-  document.querySelector(".popupMessage__message").innerHTML = message;
+function clickBtnLogin(e) {
+  if (getID() !== "null") {
+    e.preventDefault();
+    let popupLogin = document.querySelector(".popupLogin");
+    openPopup(popupLogin, true);
+  }
+}
+
+function clickBtnSave() {
+  if (getID() !== "null") {
+    inputID.value = getID();
+    inputTypeNote.value = getTypeNote().value;
+    inputTitle.value = notepadTitleNote.innerHTML;
+    btnFormSubmit.click();
+  } else {
+    openMessagePopup(getMessage().error_save_withoutLogin);
+  }
 }
 
 window.onload = () => {
+  btnLogin.addEventListener("click", (e) => clickBtnLogin(e));
+  btnSave.addEventListener("click", clickBtnSave);
+
+  btnAddNewNote.addEventListener("click", clickAddNewNote);
+  inputNewNoteTitle.addEventListener("focus", () => {
+    errorInputNewNote.style = "display:none";
+  });
+
   hideNote(getTypeNote().NOTES);
   inputDate.value = getDateYMD();
 
   copyright.innerHTML = new Date().getFullYear() + " ©";
   notepadTitleNote.innerHTML = getTitle();
 
-  closePopup.forEach((obj) => {
-    obj.addEventListener("click", () => {
-      popupContainerSettings.style = "display:none";
-      popupContainerInfo.style = "display:none";
-      popupContainerMessage.style = "display:none";
-      popupContainerLogin.style = "display:none";
-      popupContainerAddNote.style = "display:none";
-    });
-  });
-
-  clickOpenPopup([btnInfo], popupContainerInfo);
-  clickOpenPopup([btnSettings], popupContainerSettings);
-  clickOpenPopup(btnAddNote, popupContainerAddNote);
-  clickOpenPopup([btnSidebar], sidebarContainer);
-
   clickTypeNote(btnsTypeDairy, getTypeNote().NOTES);
   clickTypeNote(btnsTypeNote, getTypeNote().DAIRY);
-
-  btnLogin.addEventListener("click", (e) => {
-    if (getID() !== "null") {
-      e.preventDefault();
-      popupContainerLogin.style = "display:flex";
-    }
-  });
 
   document.querySelector(".answerYes").addEventListener("click", () => {
     deleteID(getDateNow());
   });
   document.querySelector(".answerNo").addEventListener("click", () => {
-    popupContainerLogin.style = "display:none";
-  });
-
-  btnAddNewNote.addEventListener("click", clickAddNewNote);
-
-  btnSave.addEventListener("click", () => {
-    if (getID() !== "null") {
-      inputID.value = getID();
-      inputTypeNote.value = getTypeNote().value;
-      inputTitle.value = notepadTitleNote.innerHTML;
-      btnFormSubmit.click();
-    } else {
-      openMessagePopup(getMessage().error_save_withoutLogin);
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    closeElement(e, [btnSidebar, sidebar], sidebarContainer);
-    closeElement(e, [btnInfo, popupInfo], popupContainerInfo);
-    closeElement(e, [btnSettings, popupSettings], popupContainerSettings);
-    closeElement(
-      e,
-      [btnSave, popupMessage, ...btnAddNote, btnAddNewNote],
-      popupContainerMessage
-    );
-    closeElement(e, [btnLogin, popupLogin], popupContainerLogin);
-    closeElement(e, [...btnAddNote, popupAddNote], popupContainerAddNote);
+    closeAllPopup();
   });
 };
