@@ -6,24 +6,29 @@ let delaySaveText = 1000;
 let textarea = document.querySelector(".notepad__textarea");
 let btnLogin = document.querySelector(".btnLogin");
 
-const KEY_TEXT = getDateNow();
+const TITLE_KEY = getDateNow();
 
 function saveTextInLocalStorage(event) {
   if (event.target.value === "...") {
     event.target.value = "";
   }
-  localStorage.setItem(KEY_TEXT, event.target.value);
+  localStorage.setItem(TITLE_KEY, event.target.value);
+}
+
+function getTextThisDay() {
+  let notes = document.querySelectorAll(".hiddenTextarea");
+  notes.forEach((note) => {
+    if (note.dataset.titlenote === getDateNow(true))
+      return textarea.value = note.value;
+  });
 }
 
 function getTextLocalStorage() {
-  if (localStorage.getItem(KEY_TEXT))
-    textarea.value = localStorage.getItem(KEY_TEXT);
+  if (localStorage.getItem(TITLE_KEY))
+    textarea.value = localStorage.getItem(TITLE_KEY);
   else {
-    let textareaHidden = document.querySelector(
-      ".hiddenTextarea[data-typenote=DAIRY]"
-    );
-    if (!textareaHidden) textarea.value = "...";
-    else textarea.value = textareaHidden.value;
+    getTextThisDay();
+    localStorage.setItem(TITLE_KEY, textarea.value);
   }
 }
 
@@ -40,9 +45,23 @@ function debounce(func, delay) {
 function checkSignUp() {
   let isAuth = new URL(window.location.href).searchParams.get("auth");
   if (isAuth || getID() !== "null") {
-    if (isAuth == 1) openMessagePopup(getMessage().success_signup);
-    if (isAuth == 2) openMessagePopup(getMessage().success_login);
+    if (isAuth == 1 && isFirstMessageAuth())
+      openMessagePopup(getMessage().success_signup);
+
+    if (isAuth == 2 && isFirstMessageAuth())
+      openMessagePopup(getMessage().success_login);
+
     btnLogin.src = btnLogin.src.replace("log_in", "exit");
+  }
+}
+
+function isFirstMessageAuth() {
+  if (localStorage.getItem("auth")) {
+    localStorage.setItem("auth", "2");
+    return false;
+  } else {
+    localStorage.setItem("auth", "1");
+    return true;
   }
 }
 

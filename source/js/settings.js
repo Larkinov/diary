@@ -1,6 +1,5 @@
 import { getStyleTheme, getDarkImage, getTheme, setTheme } from "./const.js";
 
-
 function changeProperty(nameProperty, theme) {
   switch (theme) {
     case "LIGHT":
@@ -41,6 +40,36 @@ function changeImageTheme(images, imagesSrc, theme) {
   }
 }
 
+function changeFontSize(btn, typeChange) {
+  let setSizeProperty = (value) => {
+    document.documentElement.style.setProperty(
+      "--font-size-notepad__textarea",
+      value
+    );
+  };
+
+  localStorage.getItem("FONT_SIZE")
+    ? setSizeProperty(localStorage.getItem("FONT_SIZE"))
+    : setSizeProperty("18px");
+
+  btn.addEventListener("click", () => {
+    let nowFontSize = document.documentElement.style
+      .getPropertyValue("--font-size-notepad__textarea")
+      .slice(0, -2);
+    if (typeChange === "reduce") {
+      if (Number(nowFontSize) - 2 >= 10) {
+        setSizeProperty(Number(nowFontSize) - 2 + "px");
+        localStorage.setItem("FONT_SIZE", Number(nowFontSize) - 2 + "px");
+      }
+    } else {
+      if (Number(nowFontSize) + 2 <= 28) {
+        setSizeProperty(Number(nowFontSize) + 2 + "px");
+        localStorage.setItem("FONT_SIZE", Number(nowFontSize) + 2 + "px");
+      }
+    }
+  });
+}
+
 function init() {
   function changeTheme(theme) {
     for (const key in styleTheme) changeProperty(styleTheme[key], theme);
@@ -52,6 +81,9 @@ function init() {
   let inputTheme = document.querySelector("#theme");
   let images = [...document.querySelectorAll("img")];
   let imagesSrc = getDarkImage();
+
+  let increaseFont = document.querySelector("#increaseFont");
+  let reduceFont = document.querySelector("#reduceFont");
 
   theme.value === theme.light
     ? (inputTheme.checked = false)
@@ -65,6 +97,9 @@ function init() {
     changeTheme(theme.value);
     setTheme(theme);
   });
+
+  changeFontSize(increaseFont, "increase");
+  changeFontSize(reduceFont, "reduce");
 }
 
 init();

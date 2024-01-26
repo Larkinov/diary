@@ -66,6 +66,7 @@ export function getMessage() {
     success_signup: "Вы успешно зарегистрированы!",
     success_login: "Вы вошли в профиль",
     success_update: "Запись обновлена",
+    success_save: "Запись сохранена",
     success_add: "Новая запись добавлена",
   };
   return MESSAGE;
@@ -96,9 +97,8 @@ export function setID(id) {
   localStorage.setItem("ID", id);
   document.cookie = "id=" + id;
 }
-export function deleteID(date) {
-  localStorage.removeItem("ID");
-  localStorage.removeItem(date);
+export function deleteID() {
+  localStorage.clear();
   document.cookie = "id=null";
   document.location.href = "/";
 }

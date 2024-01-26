@@ -11,7 +11,6 @@ import { addNewNote } from "./loadingNotes.js";
 let copyright = document.querySelector(".copyright");
 
 let notepadTitleNote = document.querySelector(".notepad__titleNote");
-let blockNotes = document.querySelectorAll(".blockNotes__container");
 
 let btnLogin = document.querySelector(".btnLogin");
 
@@ -116,7 +115,7 @@ export function getDateNow(addWordYear) {
   return dateNow;
 }
 
-function getDateYMD() {
+export function getDateYMD() {
   let date = new Date();
   let month = date.getMonth();
   month++;
@@ -129,9 +128,7 @@ function getTitle() {
   btnAddNote.forEach((btn) => {
     btn.style = "display:none";
   });
-  let note = document.querySelector(".blockNotes__note[data-typenote=DAIRY]");
-  if (!note) return getDateNow(true);
-  else return note.dataset.titlenote;
+  return getDateNow(true);
 }
 
 function hideNote(type) {
@@ -180,7 +177,7 @@ function clickBtnLogin(e) {
   if (getID() !== "null") {
     e.preventDefault();
     let popupLogin = document.querySelector(".popupLogin");
-    openPopup(popupLogin, true);
+    openPopup(popupLogin, true,true);
   }
 }
 
@@ -189,6 +186,7 @@ function clickBtnSave() {
     inputID.value = getID();
     inputTypeNote.value = getTypeNote().value;
     inputTitle.value = notepadTitleNote.innerHTML;
+    localStorage.removeItem("success");
     btnFormSubmit.click();
   } else {
     openMessagePopup(getMessage().error_save_withoutLogin);
@@ -214,7 +212,7 @@ window.onload = () => {
   clickTypeNote(btnsTypeNote, getTypeNote().DAIRY);
 
   document.querySelector(".answerYes").addEventListener("click", () => {
-    deleteID(getDateNow());
+    deleteID();
   });
   document.querySelector(".answerNo").addEventListener("click", () => {
     closeAllPopup();

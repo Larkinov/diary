@@ -18,7 +18,7 @@ require_once("./mySql/loadingNotes.php");
     <header>
         <div class="header__container">
             <h2 class="logo">
-                Simple Dialy
+                Simple Diary
             </h2>
             <div class="iconBlock">
                 <a href="authorization/"><img src="./source/img/log_in.png" alt="info" class="icon btnLogin eventPopup"></a>
@@ -40,6 +40,7 @@ require_once("./mySql/loadingNotes.php");
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
                 <div class='blockNotes__container'>
+                    <div class="blockNotes__noteNew" style="display: block;"></div>
                     <img src="./source/img/add.png" alt="add" class="icon blockNotes__btnAddNote eventPopup">
                 </div>
             </div>
@@ -52,6 +53,7 @@ require_once("./mySql/loadingNotes.php");
                 </div>
                 <input class="blockNotes__search" placeholder="Поиск записи" />
                 <div class='blockNotes__container'>
+                    <div class="blockNotes__noteNew" style="display: block;"></div>
                     <img src="./source/img/add.png" alt="add" class="icon blockNotes__btnAddNote eventPopup">
                 </div>
             </div>
@@ -95,7 +97,10 @@ require_once("./mySql/loadingNotes.php");
                     <label for="theme">Темная тема</label>
                     <input type="checkbox" id="theme" class="settings__theme">
                 </div>
-
+                <div class="fieldForm">
+                    <label for="fontSize">Размер шрифта в записях</label>
+                    <div class="settings__blockFontSize"><button class="settings__fontSize" id="reduceFont">Уменьшить</button><button class="settings__fontSize" id="increaseFont">Увеличить</button></div>
+                </div>
             </div>
             <div class="popupContent popupAddNote">
                 <h3>Создание новой записи</h3>
@@ -129,6 +134,6 @@ require_once("./mySql/loadingNotes.php");
 <script src="source/js/controlProfile.js" type="module"></script>
 <script src="source/js/eventsUI.js" type="module"></script>
 <script src="source/js/uiScript.js" type="module"></script>
-<script src="source/js/theme.js" type="module"></script>
+<script src="source/js/settings.js" type="module"></script>
 
 </html>

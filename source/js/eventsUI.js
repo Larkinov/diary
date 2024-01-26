@@ -43,16 +43,17 @@ export function closeAllPopup() {
   popupContainer.style = "display:none";
 }
 
-export function openPopup(popupElement, isSmall=false) {
+export function openPopup(popupElement, isSmall=false, isCentral=false) {
   popupElement.style = "display:block";
   isSmall ? popup.classList.add("popupSmall") :popup.classList.remove("popupSmall");
+  isCentral ? popup.classList.add("popupCentral") :popup.classList.remove("popupCentral");
   popup.style = "display:block";
   popupContainer.style = "display:flex";
 }
 
 
 export function openMessagePopup(message) {
-  openPopup(popupMessage, true);
+  openPopup(popupMessage, true, true);
   document.querySelector(".popupMessage__message").innerHTML = message;
 }
 
@@ -65,9 +66,9 @@ function addEventCloseElement(event) {
   }
 }
 
-function clickOpenPopup(btn, popupElem, isSmall=false) {
+function clickOpenPopup(btn, popupElem, isSmall=false, isCentral=false) {
   btn.addEventListener("click", () => {
-    openPopup(popupElem, isSmall);
+    openPopup(popupElem, isSmall,isCentral);
   });
 }
 

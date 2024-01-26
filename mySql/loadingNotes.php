@@ -7,7 +7,7 @@ function getNotes($connection, $id)
         $sql = "SELECT * FROM " . NAME_TABLE_TEXTS . " WHERE id_user=" . $id;
         $result = $connection->query($sql);
         while ($row = $result->fetch()) {
-            echo " <textarea class='hiddenTextarea' hidden data-titleNote='".$row['title']."' data-typeNote='".$row['type']."'>$row[text]</textarea>";
+            echo " <textarea class='hiddenTextarea' hidden data-titleNote='".$row['title']."' data-typeNote='".$row['type']."' data-dateNote='".$row['date']."'>$row[text]</textarea>";
         }
     } catch (\Throwable $th) {
         outputError("Error select database:" . $th->getMessage());
