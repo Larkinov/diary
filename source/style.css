@@ -235,6 +235,26 @@ form {
     background-color: var(--interactive-color-active);
 }
 
+.blockNotes__noteDelete {
+    position: absolute;
+    background-color: var(--interactive-color);
+    color: var(--white-text);
+    right: 2px;
+    top:6px;
+    height: 18px;
+    width: 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    padding:2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .blockNotes__search {
     padding: 4px 8px;
@@ -254,9 +274,10 @@ form {
 }
 
 .blockNotes__note {
+    position: relative;
     cursor: pointer;
     user-select: none;
-    padding: 4px 8px;
+    padding: 4px 2px;
     transition: all 0.15s ease-in;
     color: var(--interactive-color);
 }
@@ -391,6 +412,21 @@ footer {
     margin-top: 24px;
 }
 .popupLogin .answer{
+    min-width: 100px;
+    padding: 4px 8px;
+    color: var(--white-text);
+    font-size: 14px;
+}
+.popupDelete .textExit{
+    color: var(--interactive-color);
+    text-align: center;
+}
+.popupDelete__answers{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 24px;
+}
+.popupDelete .answer{
     min-width: 100px;
     padding: 4px 8px;
     color: var(--white-text);

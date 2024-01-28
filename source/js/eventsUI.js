@@ -14,8 +14,10 @@ let popupAddNote = document.querySelector(".popupAddNote");
 let popupLogin = document.querySelector(".popupLogin");
 let popupMessage = document.querySelector(".popupMessage");
 
-let allPopup = [popupInfo, popupSettings, popupAddNote, popupLogin, popupMessage];
-let elementsOpen = [...document.querySelectorAll(".eventPopup")];
+let popupDelete = document.querySelector(".popupDelete");
+
+let allPopup = [popupInfo, popupSettings, popupAddNote, popupLogin, popupMessage,popupDelete];
+let elementsOpen = null;
 
 function addSidebarEvents() {
     let sidebarContainer = document.querySelector(".sidebar__container");
@@ -74,6 +76,7 @@ function clickOpenPopup(btn, popupElem, isSmall=false, isCentral=false) {
 
 
 window.addEventListener("DOMContentLoaded", () => {
+  elementsOpen = [...document.querySelectorAll(".eventPopup")];
   addSidebarEvents();
   clickOpenPopup(btnInfo, popupInfo);
   clickOpenPopup(btnSettings, popupSettings, true);

@@ -1,5 +1,5 @@
-import { getMessage, getTypeNote } from "./const.js";
-import { openMessagePopup } from "./eventsUI.js";
+import { getMessage, getTypeNote, setDeleteNote } from "./const.js";
+import { openMessagePopup, openPopup } from "./eventsUI.js";
 import { getDateNow, getDateYMD } from "./uiScript.js";
 
 let blockNotes = document.querySelectorAll(".blockNotes__container");
@@ -9,6 +9,7 @@ let notepadTitleNote = document.querySelector(".notepad__titleNote");
 let inputTypeNote = document.querySelector("input[name='typeNote']");
 let inputTitle = document.querySelector("input[name='title']");
 let inputDate = document.querySelector("input[name='date']");
+let popupDelete = document.querySelector(".popupDelete");
 
 const CLASS_STYLE_NOTE = "blockNotes__note";
 
@@ -43,6 +44,15 @@ function isFirstMessageSuccess() {
 }
 
 function createNoteElement(title, type, date, text) {
+  let btnDelete = document.createElement("button");
+  btnDelete.innerHTML = "х";
+  btnDelete.classList.add("blockNotes__noteDelete");
+  btnDelete.classList.add("eventPopup");
+  btnDelete.addEventListener("click", () => {
+    openPopup(popupDelete, true, true);
+    setDeleteNote(title, date);
+  });
+
   let div = document.createElement("div");
   div.classList.add(CLASS_STYLE_NOTE);
   div.dataset.typenote = type;
@@ -55,6 +65,9 @@ function createNoteElement(title, type, date, text) {
     inputDate.value = date;
   });
   div.innerHTML = title;
+  if (type === getTypeNote().NOTES)
+    div.append(btnDelete);
+
   return div;
 }
 
@@ -75,8 +88,10 @@ function createNotes() {
 
 function createFirstDiaryNote() {
   if (
-    alltextareaHidden.filter((text) => text.dataset.titlenote === getDateNow(true)).length<=0
-  ){
+    alltextareaHidden.filter(
+      (text) => text.dataset.titlenote === getDateNow(true)
+    ).length <= 0
+  ) {
     addNewNote(getDateNow(true), getTypeNote().DAIRY);
   }
 }

@@ -2,7 +2,7 @@ import { getMessage, getID } from "./const.js";
 import { openMessagePopup } from "./eventsUI.js";
 import { getDateNow } from "./uiScript.js";
 
-let delaySaveText = 1000;
+let delaySaveText = 500;
 let textarea = document.querySelector(".notepad__textarea");
 let btnLogin = document.querySelector(".btnLogin");
 
@@ -16,19 +16,21 @@ function saveTextInLocalStorage(event) {
 }
 
 function getTextThisDay() {
+  let f = null;
   let notes = document.querySelectorAll(".hiddenTextarea");
   notes.forEach((note) => {
-    if (note.dataset.titlenote === getDateNow(true))
-      return textarea.value = note.value;
+    if (note.dataset.titlenote == getDateNow(true))
+      f = note.value;
   });
+  if(f) return f; else return false;
 }
 
 function getTextLocalStorage() {
-  if (localStorage.getItem(TITLE_KEY))
-    textarea.value = localStorage.getItem(TITLE_KEY);
-  else {
-    getTextThisDay();
-    localStorage.setItem(TITLE_KEY, textarea.value);
+  if (getTextThisDay()) {
+    textarea.value = getTextThisDay();
+  } else {
+    if (localStorage.getItem(TITLE_KEY))
+      textarea.value = localStorage.getItem(TITLE_KEY);
   }
 }
 

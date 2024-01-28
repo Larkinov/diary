@@ -4,6 +4,8 @@ import {
   deleteID,
   getTypeNote,
   setTypeNote,
+  getDeleteNote,
+  deleteNote,
 } from "./const.js";
 import { closeAllPopup, openMessagePopup, openPopup } from "./eventsUI.js";
 import { addNewNote } from "./loadingNotes.js";
@@ -215,6 +217,12 @@ window.onload = () => {
     deleteID();
   });
   document.querySelector(".answerNo").addEventListener("click", () => {
+    closeAllPopup();
+  });
+  document.querySelector(".answerDeleteYes").addEventListener("click", (e) => {
+    deleteNote();
+  });
+  document.querySelector(".answerDeleteNo").addEventListener("click", () => {
     closeAllPopup();
   });
 };

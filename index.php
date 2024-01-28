@@ -124,6 +124,12 @@ require_once("./mySql/loadingNotes.php");
                     <button class="icon answer answerNo">Нет</button>
                 </div>
             </div>
+            <div class="popupContent popupDelete">
+                <p class="textExit">Вы хотите удалить запись?</p>
+                <div class="popupDelete__answers"><button class="icon answer answerYes answerDeleteYes">Да</button>
+                    <button class="icon answer answerNo answerDeleteNo">Нет</button>
+                </div>
+            </div>
         </div>
     </div>
 

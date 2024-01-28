@@ -103,6 +103,23 @@ export function deleteID() {
   document.location.href = "/";
 }
 
+export function getDeleteNote() {
+  if (localStorage.getItem("DELETE_NOTE")){
+    let data = localStorage.getItem("DELETE_NOTE").split("/");
+    return data;
+  }
+  else return null;
+}
+
+export function setDeleteNote(title,date) {
+  let data = title+"/"+date;
+  localStorage.setItem("DELETE_NOTE",data)
+}
+
+export function deleteNote() {
+  console.log(getDeleteNote());
+}
+
 function init() {
   if (new URL(window.location.href).searchParams.get("id") === null) {
     if (getID() === "null" || getID() === null) {
