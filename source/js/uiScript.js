@@ -5,7 +5,6 @@ import {
   getTypeNote,
   setTypeNote,
   getDeleteNote,
-  deleteNote,
 } from "./const.js";
 import { closeAllPopup, openMessagePopup, openPopup } from "./eventsUI.js";
 import { addNewNote } from "./loadingNotes.js";
@@ -20,6 +19,7 @@ let btnAddNote = [...document.querySelectorAll(".blockNotes__btnAddNote")];
 
 let btnSave = document.querySelector(".notepad__save");
 let btnFormSubmit = document.querySelector("#btnSubmit");
+let form = document.querySelector("form");
 
 let inputDate = document.querySelector("input[name='date']");
 let inputID = document.querySelector("input[name='id']");
@@ -33,6 +33,9 @@ let btnsTypeNote = document.querySelectorAll(".blockNotes__btnNotes");
 let btnsTypeDairy = document.querySelectorAll(".blockNotes__btnDairy");
 
 let btnAddNewNote = document.querySelector(".formAddNewNote__btn");
+
+let titleProfile = document.querySelector(".popupInfo__titleProfile");
+let usernameText = document.querySelector(".popupInfo__username");
 
 function getRuNameMonth(month) {
   let nameMonth = "";
@@ -170,8 +173,7 @@ function clickAddNewNote() {
       addNewNote(inputNewNoteTitle.value, getTypeNote().NOTES);
       inputNewNoteTitle.value = "";
       openMessagePopup(getMessage().success_add);
-    }else
-    openMessagePopup(getMessage().error_save_withoutLogin);
+    } else openMessagePopup(getMessage().error_save_withoutLogin);
   }
 }
 
@@ -179,7 +181,7 @@ function clickBtnLogin(e) {
   if (getID() !== "null") {
     e.preventDefault();
     let popupLogin = document.querySelector(".popupLogin");
-    openPopup(popupLogin, true,true);
+    openPopup(popupLogin, true, true);
   }
 }
 
@@ -189,13 +191,32 @@ function clickBtnSave() {
     inputTypeNote.value = getTypeNote().value;
     inputTitle.value = notepadTitleNote.innerHTML;
     localStorage.removeItem("success");
+    form.action = "./mySql/addUpdateNote.php";
     btnFormSubmit.click();
   } else {
     openMessagePopup(getMessage().error_save_withoutLogin);
   }
 }
 
+function addUserInfo() {
+  let username = "";
+  localStorage.getItem("username")
+    ? (username = localStorage.getItem("username"))
+    : (username = new URL(window.location.href).searchParams.get("name"));
+
+  if (username) {
+    usernameText.innerHTML = "Имя: " + username;
+    titleProfile.innerHTML = "Профиль";
+  }
+}
+
 window.onload = () => {
+  addUserInfo();
+
+  let typeDairy = getTypeNote();
+  typeDairy.value = typeDairy.DAIRY;
+  setTypeNote(typeDairy);
+
   btnLogin.addEventListener("click", (e) => clickBtnLogin(e));
   btnSave.addEventListener("click", clickBtnSave);
 
@@ -220,7 +241,13 @@ window.onload = () => {
     closeAllPopup();
   });
   document.querySelector(".answerDeleteYes").addEventListener("click", (e) => {
-    deleteNote();
+    localStorage.removeItem("delete");
+    form.action = "./mySql/deleteNote.php";
+    let data = getDeleteNote();
+    inputID.value = getID();
+    inputTitle.value = data[0];
+    inputDate.value = data[1];
+    btnFormSubmit.click();
   });
   document.querySelector(".answerDeleteNo").addEventListener("click", () => {
     closeAllPopup();

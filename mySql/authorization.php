@@ -14,7 +14,7 @@ function signup($conn, $data)
             try {
                 $sql = "INSERT INTO " . NAME_TABLE_USERS . " (name, login, password) VALUES ('" . $data['name'] . "','" . $data['login'] . "','" . $data['password'] . "')";
                 $conn->exec($sql);
-                header("Location:/?id=" . $conn->lastInsertId() . "&auth=1");
+                header("Location:/?id=" . $conn->lastInsertId() . "&auth=1&name=".$data['name']);
             } catch (\Throwable $th) {
                 outputError("Error insert database: " . $th->getMessage());
             }
@@ -34,7 +34,7 @@ function login($conn, $data)
         $row = $result->fetch();
         if (!empty($row)) {
             if ($row['password'] === $data['password']) {
-                header("Location:/?id=" . $row['id'] . "&auth=2");
+                header("Location:/?id=" . $row['id'] . "&auth=2&name=".$row['name']);
             } else {
                 header("Location:/authorization?wrong=1");
             }
