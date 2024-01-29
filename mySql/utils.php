@@ -13,6 +13,21 @@ function connectionBD()
     }
 }
 
+function hasNote($conn, $data)
+{
+    try {
+        $sql = "SELECT * FROM " . NAME_TABLE_TEXTS . " WHERE date='" . $data['date'] . "' AND id_user=".$data['id']." AND type='".$data['type']."'"." AND title='".$data['title']."'";
+        $result = $conn->query($sql);
+        $row = $result->fetch();
+        if (empty($row)) {
+            return false;
+        } else
+            return true;
+    } catch (\Throwable $th) {
+        outputError("Error select database:" . $th->getMessage());
+    }
+}
+
 
 function outputError($textError)
 {

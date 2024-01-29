@@ -68,6 +68,8 @@ export function getMessage() {
     success_update: "Запись обновлена",
     success_save: "Запись сохранена",
     success_add: "Новая запись добавлена",
+    success_delete: "Запись удалена!",
+    error_delete: "Ошибка удаления записи",
   };
   return MESSAGE;
 }
@@ -114,10 +116,6 @@ export function getDeleteNote() {
 export function setDeleteNote(title,date) {
   let data = title+"/"+date;
   localStorage.setItem("DELETE_NOTE",data)
-}
-
-export function deleteNote() {
-  console.log(getDeleteNote());
 }
 
 function init() {

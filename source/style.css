@@ -361,6 +361,13 @@ footer {
     color:var(--interactive-color);
     text-align: center;
 }
+.popupContent h3 {
+    color:var(--interactive-color);
+    text-align: center;
+    font-weight: 400;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
 
 .popupContent p {
     font-size: 16px;
@@ -431,6 +438,10 @@ footer {
     padding: 4px 8px;
     color: var(--white-text);
     font-size: 14px;
+}
+
+.popupInfo__username{
+    margin-bottom: 18px !important;
 }
 
 .popupAddNote h3{

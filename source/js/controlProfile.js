@@ -19,10 +19,10 @@ function getTextThisDay() {
   let f = null;
   let notes = document.querySelectorAll(".hiddenTextarea");
   notes.forEach((note) => {
-    if (note.dataset.titlenote == getDateNow(true))
-      f = note.value;
+    if (note.dataset.titlenote == getDateNow(true)) f = note.value;
   });
-  if(f) return f; else return false;
+  if (f) return f;
+  else return false;
 }
 
 function getTextLocalStorage() {
@@ -67,8 +67,23 @@ function isFirstMessageAuth() {
   }
 }
 
+function checkDeleteNote() {
+  let isDeleteNote = new URL(window.location.href).searchParams.get("delete");
+  if (isDeleteNote == 1 && isFirstMessageDelete()) {
+    openMessagePopup(getMessage().success_delete);
+  }
+}
+
+function isFirstMessageDelete() {
+  if (!localStorage.getItem("delete")) {
+    localStorage.setItem("delete", "1");
+    return true;
+  } else return false;
+}
+
 function control() {
   checkSignUp();
+  checkDeleteNote();
   getTextLocalStorage();
 
   let saveText = debounce((event) => {
